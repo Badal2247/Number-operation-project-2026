@@ -1,0 +1,333 @@
+//Python Practice.
+//Level one.
+import java.util.*;
+public class Main{
+   static boolean  flag;
+   static int rev=0;
+    
+    //Question 1
+    public static void sumofdigit(int n){
+        int sum=0;
+        while(n!=0){
+            int rem=n%10;
+            sum+=rem;
+            n=n/10;
+        }
+        System.out.println("Your sum:"+sum);
+    }
+    
+    //Question 2
+    public static void palindrome(int n){
+       
+        int original=n;
+        int rev=0;
+        while(n!=0){
+            rev=rev*10+(n%10);
+            n=n/10;
+        }
+        if(original==rev){
+            System.out.println("Palindrome");
+        }else{
+            System.out.println("Not Palindrome");
+        }
+    }
+    
+    //Question 3
+    public static void digitcount(int n){
+        int digit=0;
+        while(n!=0){
+            int rem=n%10;
+            digit++;
+            n=n/10;
+        }
+        System.out.println("Total digit in your number: "+digit);
+    }
+    
+    //Question 4
+    public static void digitproduct(int n){
+        int product=1;
+        while(n!=0){
+            int rem=n%10;
+            product*=rem;
+            n=n/10;
+        }
+        System.out.println("Your product: "+product);
+    }
+    
+    //Question 5
+    public static boolean Armstrong(int n){
+        int original=n;
+        
+        int digit=0;
+        int sum=0;
+        int temp=n;
+        while(temp!=0){
+            digit++;
+            temp=temp/10;
+        }
+        while(n!=0){
+            int rem=n%10;
+            sum+=(int)Math.pow(rem,digit);
+            n=n/10;
+        }
+        return original==sum;
+    }
+    //List of all armstrong numbers.
+    public static void list(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter your number: ");
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++){
+            if(Armstrong(i)==true){
+                System.out.println(i);
+            }
+        }
+    }
+    
+    //Reversing a number using recursion.
+    public static void revnum(int n,int rev){
+        if(n==0){
+            System.out.println(rev);
+            return;
+        }
+        
+        revnum(n/10,rev*10+(n%10));
+        
+    }
+    
+    //Checking Prime number.
+    public static boolean isprime(int n){
+        boolean isprime=true;
+        if(n<2){
+            return false;
+        }
+        int limit=(int)Math.sqrt(n);
+        for(int i=2;i<=limit;i++){
+            if(n%i==0){
+                isprime=false;
+            }
+        }
+        return isprime;
+    }
+    
+    //List prime numbers upto n.
+    public static void primenum(int n){
+        for(int i=1;i<=n;i++){
+            if(isprime(i)==true){
+                System.out.println(i);
+            }
+        }
+    }
+    
+    //Prime digit in a number.
+    public static void primedigit(int n){
+        while(n!=0){
+            int rem=n%10;
+            if(isprime(rem)==true){
+                System.out.println(rem);
+            }
+            n=n/10;
+        }
+    }
+    
+    //Largest digit in num.
+    public static void digitcheck(int n){
+        int max=0;
+        while(n!=0){
+            int rem=n%10;
+            if(rem>max){
+                max=rem;
+            }
+            n=n/10;
+        }
+        System.out.println("Largest digit in your num: "+max);
+    }
+    
+    //Largest Prime number in your digit.
+    public static void largestprime(int n){
+        int max=0;
+        while(n!=0){
+            int rem=n%10;
+            if(isprime(rem)==true){
+                if(rem>max){
+                    max=rem;
+                }
+            }
+            n=n/10;
+        }
+        System.out.println("Max prime digit in your number: "+max);
+    }
+    
+    //Factorial
+    public static int fact(int n){
+        int fact=1;
+        for(int i=1;i<=n;i++){
+            fact=fact*i;
+        }
+        return fact;
+    }
+    
+    //Strong number.
+    public static boolean strongnum(int n){
+        
+        int original=n;
+        long sum=0;
+        while(n!=0){
+            int rem=n%10;
+            sum+=fact(rem);
+            n=n/10;
+        }
+        if(original!=sum){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    //List all the strong numbers.
+    public static void liststrongnum(int n){
+        for(int i=1;i<=n;i++){
+            if(strongnum(i)==true){
+                System.out.println(i);
+            }
+        }
+    }
+    
+    //Harshad number.
+    public static boolean nevinnum(int n){
+        
+        int original=n;
+        
+        int sum=0;
+        while(n!=0){
+            int rem=n%10;
+            sum+=rem;
+            n=n/10;
+        }
+        if(original%sum==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    //List of all Harshad number.
+    public static void listnevinnum(int n){
+        for(int i=1;i<=n;i++){
+            if(nevinnum(i)==true){
+                System.out.println(i);
+            }
+        }
+    }
+    
+    //Converting number into array.
+    public static void numtoarray(int n){
+        int original=n;
+        int digit=0;
+        while(n!=0){
+            digit++;
+            n=n/10;
+        }
+        int[] arr=new int[digit];
+        for(int i=digit-1;i>=0;i--){
+            int rem=original%10;
+            arr[i]=rem;
+            original=original/10;
+        }
+        for(int x: arr){
+            System.out.print(x+" ");
+        }
+    }
+    public static void main(String[]args){
+        
+        
+        Scanner sc=new Scanner(System.in);
+        do{
+        System.out.println("===========TOPIC LIST==========");
+        System.out.println();
+        System.out.println("1. Sum of digit");
+        System.out.println("2. Palindrome check");
+        System.out.println("3. Digit Count");
+        System.out.println("4. Digit Count");
+        System.out.println("5. Check Armstrong");
+        System.out.println("6. List Armstrong number");
+        System.out.println("7. Reverse a number using recursion");
+        System.out.println("8. Prime number check");
+        System.out.println("9. List prime number upto n.");
+        System.out.println("10. Check largest digit in your num.");
+        System.out.println("11. Largest prime digit in your number: ");
+        System.out.println("12. Check Strong number.");
+        System.out.println("13. List of strong number.");
+        System.out.println("14. Harshad number check.");
+        System.out.println("15. Harshad number upto n.");
+        System.out.println("16. Number to array");
+        System.out.println();
+        System.out.println("===============================");
+        System.out.println();
+        System.out.println("Enter what to do: ");
+        int x=sc.nextInt();
+        System.out.println();
+        System.out.println("===============================");
+        System.out.println();
+        System.out.println("Enter your number: ");
+        int n=sc.nextInt();
+        System.out.println();
+        switch(x){
+            case 1: sumofdigit(n);
+            break;
+            case 2: palindrome(n);
+            break;
+            case 3: digitcount(n);
+            break;
+            case 4: digitproduct(n);
+            break;
+            case 5: System.out.println(Armstrong(n));
+            break;
+            case 6: list();
+            break;
+            case 7: revnum(n,0);
+            break;
+            case 8: System.out.println(isprime(n));
+            break;
+            case 9: primenum(n);
+            break; 
+            case 10: digitcheck(n);
+            break;
+            case 11: largestprime(n);
+            break;
+            case 12: if(strongnum(n)==true){
+                System.out.println("Strong number.");
+            }else{
+                System.out.println("This is not strong number.");
+            }
+            break;
+            case 13: liststrongnum(n);
+            break;
+            case 14: System.out.println(nevinnum(n));
+            break;
+            case 15: listnevinnum(n);
+            break;
+            case 16: numtoarray(n);
+            break;
+            default:
+                System.out.println("Enter a valid number.");
+                break;
+        }
+        sc.nextLine();
+        System.out.println("Do you want to continue this program (y/n)?: ");
+        String s=sc.nextLine();
+        
+        if(s.equalsIgnoreCase("n")){
+            flag=false;
+        }else if(s.equalsIgnoreCase("y")){
+            flag=true;
+        }else{
+            System.out.println("Enter a valid input.");
+            return;
+        }
+        }while(flag);
+        System.out.println();
+        System.out.println("Come again soon :)");
+        
+    }
+}
