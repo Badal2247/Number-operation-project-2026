@@ -6,14 +6,14 @@ public class Main{
    static int rev=0;
     
     //Question 1
-    public static void sumofdigit(int n){
+    public static int sumofdigit(int n){
         int sum=0;
         while(n!=0){
             int rem=n%10;
             sum+=rem;
             n=n/10;
         }
-        System.out.println("Your sum:"+sum);
+        return sum;
     }
     
     //Question 2
@@ -238,6 +238,105 @@ public class Main{
             System.out.print(x+" ");
         }
     }
+    
+    //Count frequency
+    public static void freq(long n){
+        int[]freq=new int[10];
+        while(n!=0){
+            int rem=(int)n%10;
+            freq[rem]++;
+            n=n/10;
+        }
+        for(int i=0;i<10;i++){
+            if(freq[i]>0){
+                System.out.println(i+"-->"+freq[i]);
+            }
+        }
+    }
+    
+    
+    //Checking perfect number.
+    public static boolean perfectnum(int n){
+        int sum=0;
+        for(int i=1;i<n;i++){
+            if(n%i==0){
+                sum+=i;
+            }
+        }
+        return sum==n;
+        
+    }
+    
+    //List all perfect nums upto n.
+    public static void listperfectnums(int n){
+        for(int i=1;i<=n;i++){
+            if(perfectnum(i)==true){
+                System.out.println(i);
+            }
+        }
+    }
+    
+    
+    //Decimal into binary
+    public static void dectobin(int n){
+        int bin=0;
+        int power=0;
+        while(n!=0){
+            
+            int rem=n%2;
+            bin=bin+rem*(int)Math.pow(10,power);
+            power++;
+            n=n/2;
+        }
+        System.out.println("Your binary digit: "+bin);
+    }
+    
+    //Find GCD
+    public static int GCD(int n1,int n2){
+        while(n1!=0){
+            int rem=n2%n1;
+            int temp=n1;
+            n1=rem;
+            n2=temp;
+        }
+        return n2;
+    }
+    
+    //Find LCM
+    public static void LCM(int n1,int n2){
+        int lcm=(n1*n2)/GCD(n1,n2);
+        System.out.println("Your LCM: "+lcm);
+    }
+    
+    
+    
+    public static int sqofdigit(int n){
+        int sum=0;
+        while(n!=0){
+            int rem=n%10;
+            sum+=rem*rem;
+            n=n/10;
+        }
+        
+        return sum;
+    }
+    
+    //Check happynum
+    public static boolean happynum(int n){
+        while(n!=1 && n!=4){
+           n =sqofdigit(n);
+        }
+        return n==1;
+    }
+    
+    //List of all happynum.
+    public static void listofhappynums(int n){
+        for(int i=1;i<=n;i++){
+            if(happynum(i)==true){
+                System.out.println(i);
+            }
+        }
+    }
     public static void main(String[]args){
         
         
@@ -261,6 +360,14 @@ public class Main{
         System.out.println("14. Harshad number check.");
         System.out.println("15. Harshad number upto n.");
         System.out.println("16. Number to array");
+        System.out.println("17. To find frequency.");
+        System.out.println("18. Check Perfect num.");
+        System.out.println("19. List perfect num.");
+        System.out.println("20. Decimal into binary.");
+        System.out.println("21. To find GCD.");
+        System.out.println("22. TO find LCM.");
+        System.out.println("23. Check Happy Number.");
+        System.out.println("24. List of Happy nums upto n");
         System.out.println();
         System.out.println("===============================");
         System.out.println();
@@ -273,7 +380,7 @@ public class Main{
         int n=sc.nextInt();
         System.out.println();
         switch(x){
-            case 1: sumofdigit(n);
+            case 1: System.out.println(sumofdigit(n));
             break;
             case 2: palindrome(n);
             break;
@@ -308,6 +415,33 @@ public class Main{
             case 15: listnevinnum(n);
             break;
             case 16: numtoarray(n);
+            break;
+            case 17: freq(n);
+            break;
+            case 18: System.out.println(perfectnum(n));
+            break;
+            case 19: listperfectnums(n);
+            break;
+            case 20: dectobin(n);
+            break;
+            case 21: {System.out.println("Enter your num1: ");
+            int num1=sc.nextInt();
+            System.out.println("Enter your num2: ");
+            int num2=sc.nextInt();
+                System.out.println(GCD(num1,num2));
+            }
+            break;
+            case 22: {
+                System.out.println("Enter your num1: ");
+                int num1=sc.nextInt();
+                System.out.println("Enter your num2: ");
+                int num2=sc.nextInt();
+                LCM(num1,num2);
+            }
+            break;
+            case 23: System.out.println(happynum(n));
+            break;
+            case 24: listofhappynums(n);
             break;
             default:
                 System.out.println("Enter a valid number.");
